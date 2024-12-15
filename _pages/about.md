@@ -1,13 +1,13 @@
 ---
 permalink: /
-title: "Welcome to Duygu's website'"
+title: "Welcome to Duygu's website"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
-Hello there, I'm a postdoctoral reseach associate in Oak Ridge Natioan Laboratory. My research focuses on numerical analysis,  iterative methods for solving the system of nonlinear partial differential equations (PDE), finite element methods (FEM), data assimilation techniques, and numerical methods for plasma and fluid dynamics applications. I'm driven by the pursuit of rigorous mathematical analysis of numerical methods, exploring the physical interpretations of PDEs, and validating these insights through rigorous computational experiments.
+Hello, I am a postdoctoral research associate at Oak Ridge National Laboratory. My research focuses on numerical analysis, iterative methods for solving systems of nonlinear partial differential equations (PDEs), finite element methods (FEM), data assimilation techniques, and numerical methods for plasma and fluid dynamics applications. I am passionate about conducting rigorous mathematical analysis of numerical methods, exploring the physical interpretations of PDEs, and validating these insights through comprehensive computational experiments.
 
 <!-- This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the repository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this template](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads!
 
