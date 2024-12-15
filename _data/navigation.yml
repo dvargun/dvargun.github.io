@@ -5,13 +5,8 @@
 # prevent it from being included in the site.
 
 main:
-  - title: "CV"
-     url: /cv/
-    #url: /files/CV_DuyguVargun.pdf
-
   - title: "Publications"
-    #url: /publications/
-    url: https://scholar.google.com/citations?user=cpB4pUUAAAAJ&hl=en
+    url: /publications/
 
   - title: "Talks"
     url: /talks/    
@@ -25,6 +20,8 @@ main:
   - title: "Blog Posts"
     url: /year-archive/
     
+  - title: "CV"
+    url: /cv/
     
   - title: "Guide"
     url: /markdown/
