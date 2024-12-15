@@ -19,18 +19,15 @@ Work experience
 ======
 * August 2023: Postdoctoral Research Associate
   * Oak Ridge National Laboratory
-  <!-- * Duties includes: Updates and improvements to template
-  * Supervisor: The Users -->
+
 
 * August 2020 - August 2023: Graduate Teacher of Record
   * Clemson University
-  <!-- * Duties included: Merging pull requests
-  * Supervisor: Professor Hub -->
+
 
 * May 2022 - August 2022: Summer Graduate Intern
   * Lawrence Livermore National Laboratory
-  <!-- * Duties included: Tagging issues
-  * Supervisor: Professor Git -->
+
 
 * January 2019 - August 2020 : Graduate Teaching Assistant
   * Clemson University
