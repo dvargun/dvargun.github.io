@@ -14,40 +14,48 @@ author_profile: true
   </div>
 {% endif %}
 
-{% assign pubs = site.collections['publications'].docs | sort: "date" | reverse %}
-
-<div class="pub-filters">
-  <button class="pub-filter is-active" type="button" data-category="all">All</button>
-
-  {% if site.publication_category %}
-    {% for cat in site.publication_category %}
-      <button class="pub-filter" type="button" data-category="{{ cat[0] }}">
-        {{ cat[1].title }}
+{%- comment -%}
+Quarto-style category chips built from publication_category.
+{%- endcomment -%}
+{% if site.publication_category %}
+  <div class="pub-filters">
+    <button class="pub-filter is-active" type="button" data-category="all">All</button>
+    {% for category in site.publication_category %}
+      <button class="pub-filter" type="button" data-category="{{ category[0] }}">
+        {{ category[1].title }}
       </button>
     {% endfor %}
-  {% endif %}
-</div>
+  </div>
+  <hr/>
+{% endif %}
 
-<hr/>
+{%- comment -%}
+Render publications by category exactly like Academic Pages,
+but wrap each entry with a data-category for JS filtering.
+{%- endcomment -%}
 
 {% if site.publication_category %}
-  {% for cat in site.publication_category %}
-    <h2>{{ cat[1].title }}</h2>
-    <hr />
+  {% for category in site.publication_category %}
+    {% assign title_shown = false %}
 
-    {% for post in pubs %}
-      {% if post.category != cat[0] %}
-        {% continue %}
+    {% for post in site.publications reversed %}
+      {% if post.category == category[0] %}
+
+        {% unless title_shown %}
+          <h2>{{ category[1].title }}</h2><hr />
+          {% assign title_shown = true %}
+        {% endunless %}
+
+        <div class="pub-item" data-category="{{ post.category }}">
+          {% include archive-single.html %}
+        </div>
+
       {% endif %}
-
-      <div class="pub-item" data-category="{{ post.category }}">
-        {% include archive-single.html %}
-      </div>
     {% endfor %}
   {% endfor %}
 
 {% else %}
-  {% for post in pubs %}
+  {% for post in site.publications reversed %}
     <div class="pub-item" data-category="{{ post.category }}">
       {% include archive-single.html %}
     </div>
