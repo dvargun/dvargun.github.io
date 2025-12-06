@@ -90,6 +90,10 @@ publication_category:
     title: 'Journal Articles'    
   conferences:
     title: 'Conference Papers'
+  patents:
+    title: "Patents"
+  software:
+    title: "Software"
 
 
 # Site Settings
