@@ -5,32 +5,83 @@ permalink: /publications/
 author_profile: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
-
 {% include base_path %}
 
-<!-- New style rendering if publication categories are defined -->
+{% if site.author.googlescholar %}
+  <div class="wordwrap">
+    You can also find my articles on
+    <a href="{{ site.author.googlescholar }}">my Google Scholar profile</a>.
+  </div>
+{% endif %}
+
+{% assign pubs = site.collections['publications'].docs | sort: "date" | reverse %}
+
+<div class="pub-filters">
+  <button class="pub-filter is-active" type="button" data-category="all">All</button>
+
+  {% if site.publication_category %}
+    {% for cat in site.publication_category %}
+      <button class="pub-filter" type="button" data-category="{{ cat[0] }}">
+        {{ cat[1].title }}
+      </button>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<hr/>
+
 {% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
+  {% for cat in site.publication_category %}
+    <h2>{{ cat[1].title }}</h2>
+    <hr />
+
+    {% for post in pubs %}
+      {% if post.category != cat[0] %}
         {% continue %}
       {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
+
+      <div class="pub-item" data-category="{{ post.category }}">
+        {% include archive-single.html %}
+      </div>
     {% endfor %}
   {% endfor %}
+
 {% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
+  {% for post in pubs %}
+    <div class="pub-item" data-category="{{ post.category }}">
+      {% include archive-single.html %}
+    </div>
   {% endfor %}
 {% endif %}
 
+<script>
+(() => {
+  const buttons = () => Array.from(document.querySelectorAll(".pub-filter"));
+  const items = () => Array.from(document.querySelectorAll(".pub-item"));
 
+  function setActive(activeBtn) {
+    buttons().forEach(b => b.classList.remove("is-active"));
+    if (activeBtn) activeBtn.classList.add("is-active");
+  }
 
+  function filterItems(category) {
+    const key = (category || "all").toLowerCase();
+
+    items().forEach(item => {
+      const c = (item.dataset.category || "").toLowerCase();
+      const show = key === "all" || c === key;
+      item.style.display = show ? "" : "none";
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    buttons().forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.category || "all";
+        filterItems(key);
+        setActive(btn);
+      });
+    });
+  });
+})();
+</script>
