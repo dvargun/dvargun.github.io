@@ -5,32 +5,107 @@ permalink: /publications/
 author_profile: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
-
 {% include base_path %}
 
-<!-- New style rendering if publication categories are defined -->
+{% if site.author.googlescholar %}
+  <div class="wordwrap">
+    You can also find my articles on
+    <a href="{{ site.author.googlescholar }}">my Google Scholar profile</a>.
+  </div>
+{% endif %}
+
+{% assign pubs = site.collections['publications'].docs | sort: "date" | reverse %}
+
+{% comment %}
+Collect all keywords across publications.
+{% endcomment %}
+{% assign all_keywords = pubs | map: "keywords" | join: "," | split: "," | uniq | sort %}
+
+<div class="pub-filters">
+  <button class="pub-filter is-active" type="button" data-keyword="all">All</button>
+  {% for k in all_keywords %}
+    {% assign kk = k | strip %}
+    {% if kk != "" %}
+      <button class="pub-filter" type="button" data-keyword="{{ kk | downcase }}">
+        {{ kk }}
+      </button>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<hr/>
+
 {% if site.publication_category %}
-  {% for category in site.publication_category  %}
+  {% for category in site.publication_category %}
     {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
+
+    {% for post in pubs %}
       {% if post.category != category[0] %}
         {% continue %}
       {% endif %}
+
       {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
+        <h2>{{ category[1].title }}</h2>
+        <hr />
         {% assign title_shown = true %}
       {% endunless %}
-      {% include archive-single.html %}
+
+      {% assign kw_attr = "" %}
+      {% if post.keywords %}
+        {% assign kw_attr = post.keywords | join: "," | downcase %}
+      {% endif %}
+
+      <div class="pub-item" data-keywords="{{ kw_attr }}">
+        {% include archive-single.html %}
+      </div>
     {% endfor %}
   {% endfor %}
+
 {% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
+
+  {% for post in pubs %}
+    {% assign kw_attr = "" %}
+    {% if post.keywords %}
+      {% assign kw_attr = post.keywords | join: "," | downcase %}
+    {% endif %}
+
+    <div class="pub-item" data-keywords="{{ kw_attr }}">
+      {% include archive-single.html %}
+    </div>
   {% endfor %}
+
 {% endif %}
 
+<script>
+(() => {
+  const normalize = (s) => (s || "").toLowerCase().trim();
+  const buttons = () => Array.from(document.querySelectorAll(".pub-filter"));
+  const items = () => Array.from(document.querySelectorAll(".pub-item"));
 
+  function setActive(activeBtn) {
+    buttons().forEach(b => b.classList.remove("is-active"));
+    if (activeBtn) activeBtn.classList.add("is-active");
+  }
 
+  function filterItems(keyword) {
+    const key = normalize(keyword);
+
+    items().forEach(item => {
+      const raw = item.dataset.keywords || "";
+      const kws = raw.split(",").map(normalize).filter(Boolean);
+      const show = key === "all" || kws.includes(key);
+      item.style.display = show ? "" : "none";
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    buttons().forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.keyword || "all";
+        filterItems(key);
+        setActive(btn);
+      });
+    });
+  });
+})();
+</script>
