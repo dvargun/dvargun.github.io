@@ -39,14 +39,22 @@ but wrap each entry with a data-category for JS filtering.
     {% assign title_shown = false %}
 
     {% for post in site.publications reversed %}
-      {% if post.category == category[0] %}
+      {% if post.categories contains category[0] %}
 
         {% unless title_shown %}
           <h2>{{ category[1].title }}</h2><hr />
           {% assign title_shown = true %}
         {% endunless %}
 
-        <div class="pub-item" data-category="{{ post.category }}">
+        {% assign cat_attr = "" %}
+        {% if post.categories %}
+          {% assign cat_attr = post.categories | join: "," | downcase %}
+        {% elsif post.category %}
+          {% assign cat_attr = post.category | downcase %}
+        {% endif %}
+
+        <div class="pub-item" data-category="{{ cat_attr }}">
+  
           {% include archive-single.html %}
         </div>
 
@@ -56,7 +64,14 @@ but wrap each entry with a data-category for JS filtering.
 
 {% else %}
   {% for post in site.publications reversed %}
-    <div class="pub-item" data-category="{{ post.category }}">
+    {% assign cat_attr = "" %}
+    {% if post.categories %}
+      {% assign cat_attr = post.categories | join: "," | downcase %}
+    {% elsif post.category %}
+      {% assign cat_attr = post.category | downcase %}
+    {% endif %}
+
+    <div class="pub-item" data-category="{{ cat_attr }}">
       {% include archive-single.html %}
     </div>
   {% endfor %}
@@ -76,8 +91,9 @@ but wrap each entry with a data-category for JS filtering.
     const key = (category || "all").toLowerCase();
 
     items().forEach(item => {
-      const c = (item.dataset.category || "").toLowerCase();
-      const show = key === "all" || c === key;
+      const raw = item.dataset.category || "";
+      const cats = raw.split(",").map(s => s.trim().toLowerCase()).filter(Boolean);
+      const show = key === "all" || cats.includes(key);
       item.style.display = show ? "" : "none";
     });
   }
