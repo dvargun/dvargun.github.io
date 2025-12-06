@@ -14,9 +14,9 @@ author_profile: true
   </div>
 {% endif %}
 
-{%- comment -%}
-Quarto-style category chips built from publication_category.
-{%- endcomment -%}
+{% comment %}
+Filter chips
+{% endcomment %}
 {% if site.publication_category %}
   <div class="pub-filters">
     <button class="pub-filter is-active" type="button" data-category="all">All</button>
@@ -29,40 +29,10 @@ Quarto-style category chips built from publication_category.
   <hr/>
 {% endif %}
 
-{%- comment -%}
-Render publications by category exactly like Academic Pages,
-but wrap each entry with a data-category for JS filtering.
-{%- endcomment -%}
-
-{% if site.publication_category %}
-  {% for category in site.publication_category %}
-    {% assign title_shown = false %}
-
-    {% for post in site.publications reversed %}
-      {% if post.categories contains category[0] %}
-
-        {% unless title_shown %}
-          <h2>{{ category[1].title }}</h2><hr />
-          {% assign title_shown = true %}
-        {% endunless %}
-
-        {% assign cat_attr = "" %}
-        {% if post.categories %}
-          {% assign cat_attr = post.categories | join: "," | downcase %}
-        {% elsif post.category %}
-          {% assign cat_attr = post.category | downcase %}
-        {% endif %}
-
-        <div class="pub-item" data-category="{{ cat_attr }}">
-  
-          {% include archive-single.html %}
-        </div>
-
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
-
-{% else %}
+{% comment %}
+ALL LIST (flat, unique)
+{% endcomment %}
+<div id="pub-all-list">
   {% for post in site.publications reversed %}
     {% assign cat_attr = "" %}
     {% if post.categories %}
@@ -71,38 +41,82 @@ but wrap each entry with a data-category for JS filtering.
       {% assign cat_attr = post.category | downcase %}
     {% endif %}
 
-    <div class="pub-item" data-category="{{ cat_attr }}">
+    <div class="pub-item" data-categories="{{ cat_attr }}">
       {% include archive-single.html %}
     </div>
   {% endfor %}
+</div>
+
+{% comment %}
+CATEGORY LISTS (grouped)
+{% endcomment %}
+{% if site.publication_category %}
+  <div id="pub-category-lists" style="display:none;">
+    {% for category in site.publication_category %}
+      <div class="pub-category-block" data-category-block="{{ category[0] }}" style="display:none;">
+        <h2>{{ category[1].title }}</h2>
+        <hr />
+
+        {% for post in site.publications reversed %}
+
+          {% if post.categories %}
+            {% if post.categories contains category[0] %}
+              {% assign cat_attr = post.categories | join: "," | downcase %}
+              <div class="pub-item" data-categories="{{ cat_attr }}">
+                {% include archive-single.html %}
+              </div>
+            {% endif %}
+          {% else %}
+            {% if post.category == category[0] %}
+              {% assign cat_attr = post.category | downcase %}
+              <div class="pub-item" data-categories="{{ cat_attr }}">
+                {% include archive-single.html %}
+              </div>
+            {% endif %}
+          {% endif %}
+
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
 {% endif %}
 
 <script>
 (() => {
   const buttons = () => Array.from(document.querySelectorAll(".pub-filter"));
-  const items = () => Array.from(document.querySelectorAll(".pub-item"));
+  const allList = document.getElementById("pub-all-list");
+  const categoryLists = document.getElementById("pub-category-lists");
+  const categoryBlocks = () => Array.from(document.querySelectorAll(".pub-category-block"));
 
   function setActive(activeBtn) {
     buttons().forEach(b => b.classList.remove("is-active"));
     if (activeBtn) activeBtn.classList.add("is-active");
   }
 
-  function filterItems(category) {
-    const key = (category || "all").toLowerCase();
+  function showAll() {
+    if (allList) allList.style.display = "";
+    if (categoryLists) categoryLists.style.display = "none";
+    categoryBlocks().forEach(b => b.style.display = "none");
+  }
 
-    items().forEach(item => {
-      const raw = item.dataset.category || "";
-      const cats = raw.split(",").map(s => s.trim().toLowerCase()).filter(Boolean);
-      const show = key === "all" || cats.includes(key);
-      item.style.display = show ? "" : "none";
+  function showCategory(key) {
+    if (allList) allList.style.display = "none";
+    if (categoryLists) categoryLists.style.display = "";
+
+    categoryBlocks().forEach(b => {
+      const blockKey = (b.dataset.categoryBlock || "").toLowerCase();
+      b.style.display = blockKey === key ? "" : "none";
     });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    showAll();
+
     buttons().forEach(btn => {
       btn.addEventListener("click", () => {
-        const key = btn.dataset.category || "all";
-        filterItems(key);
+        const key = (btn.dataset.category || "all").toLowerCase();
+        if (key === "all") showAll();
+        else showCategory(key);
         setActive(btn);
       });
     });
