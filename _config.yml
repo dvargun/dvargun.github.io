@@ -100,7 +100,10 @@ publication_category:
     title: "Anderson acceleration"
   viscoplastics:
     title: "Viscoplastic fluids"
-  
+  viscoelastics:
+    title: "Viscoelastic fluids"  
+  fpiter:
+    title: "fixed-point iterations"
   
   
 
