@@ -8,15 +8,14 @@ author_profile: true
 {% include base_path %}
 
 {% if site.author.googlescholar %}
-    <div class="wordwrap pub-scholar">
+  <div class="wordwrap">
     You can also find my articles on
     <a href="{{ site.author.googlescholar }}">my Google Scholar profile</a>.
   </div>
 {% endif %}
 
-{% comment %}
-Filter chips
-{% endcomment %}
+<div class="pub-scholar-gap"></div>
+
 {% if site.publication_category %}
   <div class="pub-filters">
     <button class="pub-filter is-active" type="button" data-category="all">All</button>
