@@ -137,13 +137,6 @@ redirect_from:
     </li>
     <li class="talk-item">
       <div class="talk-main">
-        <span class="talk-title">Energy HPC &amp; AI Conference</span>
-        <span class="talk-venue"><em>Participant</em> · Rice University, TX</span>
-      </div>
-      <span class="talk-date">Feb 2026</span>
-    </li>
-    <li class="talk-item">
-      <div class="talk-main">
         <span class="talk-title">RTG NASC Annual Workshop</span>
         <span class="talk-venue">Rice University, TX</span>
       </div>
@@ -194,19 +187,3 @@ redirect_from:
   </ul>
 </section>
 
-<!-- ===================== CONTACT ===================== -->
-<section id="contact" class="home-section">
-  <h2 class="section-title">Contact</h2>
-  <p class="section-lead">
-    I am always happy to connect about numerical analysis, scientific computing, and
-    collaborations. The fastest way to reach me is by email.
-  </p>
-  <ul class="contact-list">
-    <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:duygu.vargun@rice.edu">duygu.vargun@rice.edu</a></li>
-    <li><i class="fas fa-location-dot" aria-hidden="true"></i> Rice University, Houston, TX</li>
-    <li><i class="ai ai-google-scholar" aria-hidden="true"></i> <a href="https://scholar.google.com/citations?user=cpB4pUUAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
-    <li><i class="ai ai-orcid" aria-hidden="true"></i> <a href="https://orcid.org/0000-0002-0734-467X" target="_blank" rel="noopener">ORCID</a></li>
-    <li><i class="fab fa-linkedin" aria-hidden="true"></i> <a href="https://www.linkedin.com/in/duygu-vargun-19b71a140" target="_blank" rel="noopener">LinkedIn</a></li>
-    <li><i class="fab fa-github" aria-hidden="true"></i> <a href="https://github.com/dvargun" target="_blank" rel="noopener">GitHub</a></li>
-  </ul>
-</section>
