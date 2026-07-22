@@ -71,37 +71,127 @@ redirect_from:
       <p>Continuous data assimilation techniques for recovering and forecasting fluid flows.</p>
     </div>
     <div class="research-card">
-      <h3>Complex Fluids &amp; Plasma Dynamics</h3>
-      <p>Numerical methods for viscoelastic and viscoplastic fluids, plasma dynamics, and biomedical systems.</p>
+      <h3>Solvers for Complex Fluid Flows</h3>
+      <p>Numerical methods for complex fluids and related applications.</p>
     </div>
   </div>
 </section>
 
-<!-- ===================== TALKS ===================== -->
+<!-- ===================== EDUCATION ===================== -->
+<section id="education" class="home-section">
+  <h2 class="section-title">Education</h2>
+  <ul class="edu-list">
+    <li class="edu-item">
+      <div class="edu-header">
+        <div>
+          <span class="edu-degree">Ph.D. in Mathematical Sciences</span>
+          <span class="edu-inst">Clemson University · Clemson, SC, USA</span>
+        </div>
+        <span class="edu-date"> 2023</span>
+      </div>
+      <div class="edu-meta">
+        Advisor: Leo Rebholz<br />
+        Dissertation:
+        <a href="https://tigerprints.clemson.edu/all_dissertations/3457/" target="_blank" rel="noopener"><em>Acceleration methods for nonlinear solvers and application to fluid flow simulations</em></a>
+      </div>
+    </li>
+    <li class="edu-item">
+      <div class="edu-header">
+        <div>
+          <span class="edu-degree">M.S. in Mathematics</span>
+          <span class="edu-inst">Middle East Technical University · Ankara, Turkey</span>
+        </div>
+        <span class="edu-date"> 2018</span>
+      </div>
+    </li>
+    <li class="edu-item">
+      <div class="edu-header">
+        <div>
+          <span class="edu-degree">B.S. in Mathematics</span>
+          <span class="edu-inst">Middle East Technical University · Ankara, Turkey</span>
+        </div>
+        <span class="edu-date"> 2015</span>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- ===================== TALKS =====================
+     Edit talks directly below. To add one, copy a <li class="talk-item"> ... </li>
+     block. To remove one, delete its block. -->
 <section id="talks" class="home-section">
   <h2 class="section-title">Talks</h2>
-  {% assign talks = site.talks | sort: "date" | reverse %}
-  {% if talks.size > 0 %}
-    <ul class="talk-list">
-      {% for talk in talks %}
-        <li class="talk-item">
-          <div class="talk-main">
-            <span class="talk-title">{{ talk.title }}</span>
-            {% if talk.venue or talk.location %}
-              <span class="talk-venue">
-                {{ talk.venue }}{% if talk.venue and talk.location %}, {% endif %}{{ talk.location }}
-              </span>
-            {% endif %}
-          </div>
-          {% if talk.date %}
-            <span class="talk-date">{{ talk.date | date: "%b %Y" }}</span>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p class="section-lead">Selected talks and presentations will be listed here soon.</p>
-  {% endif %}
+
+  <h3 class="talk-group-title">Upcoming</h3>
+  <p class="talk-empty">To be announced.</p>
+  <!-- Add an upcoming talk by pasting a <li class="talk-item"> block inside a <ul class="talk-list"> here. -->
+
+  <h3 class="talk-group-title">Recent</h3>
+  <ul class="talk-list">
+    <li class="talk-item">
+      <div class="talk-main">
+        <span class="talk-title">Women in Computational Methods for PDEs</span>
+        <span class="talk-venue"><em>Virtual participant</em> · Banff International Research Station</span>
+      </div>
+      <span class="talk-date">Mar 2026</span>
+    </li>
+    <li class="talk-item">
+      <div class="talk-main">
+        <span class="talk-title">Energy HPC &amp; AI Conference</span>
+        <span class="talk-venue"><em>Participant</em> · Rice University, TX</span>
+      </div>
+      <span class="talk-date">Feb 2026</span>
+    </li>
+    <li class="talk-item">
+      <div class="talk-main">
+        <span class="talk-title">RTG NASC Annual Workshop</span>
+        <span class="talk-venue">Rice University, TX</span>
+      </div>
+      <span class="talk-date">Oct 2025</span>
+    </li>
+    <li class="talk-item">
+      <div class="talk-main">
+        <span class="talk-title">2025 AWM Research Symposium</span>
+        <span class="talk-venue"><em>Session organizer</em> · University of Wisconsin&ndash;Madison, WI</span>
+      </div>
+      <span class="talk-date">May 2025</span>
+    </li>
+    <li class="talk-item">
+      <div class="talk-main">
+        <span class="talk-title">SIAM SEAS Annual Meeting</span>
+        <span class="talk-venue"><em>Invited talk</em> · University of Tennessee&ndash;Knoxville, TN</span>
+      </div>
+      <span class="talk-date">Mar 2025</span>
+    </li>
+    <li class="talk-item">
+      <div class="talk-main">
+        <span class="talk-title">SIAM CSE</span>
+        <span class="talk-venue"><em>Invited talk</em> · Fort Worth, TX</span>
+      </div>
+      <span class="talk-date">Mar 2025</span>
+    </li>
+    <li class="talk-item">
+      <div class="talk-main">
+        <span class="talk-title">Joint Mathematics Meetings 2025</span>
+        <span class="talk-venue"><em>Invited talk</em> · Seattle, WA</span>
+      </div>
+      <span class="talk-date">Jan 2025</span>
+    </li>
+    <li class="talk-item">
+      <div class="talk-main">
+        <span class="talk-title">October Math Day Symposium</span>
+        <span class="talk-venue"><em>Keynote talk</em> · UNC Charlotte, NC</span>
+      </div>
+      <span class="talk-date">Oct 2024</span>
+    </li>
+    <li class="talk-item">
+      <div class="talk-main">
+        <span class="talk-title">ICERM: Numerical Analysis of Multiphysics Problems</span>
+        <span class="talk-venue"><em>Poster</em> · Brown University, MA</span>
+      </div>
+      <span class="talk-date">Feb 2024</span>
+    </li>
+  </ul>
 </section>
 
 <!-- ===================== CONTACT ===================== -->
