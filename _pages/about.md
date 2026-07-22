@@ -14,7 +14,7 @@ redirect_from:
 <section id="about" class="home-section home-hero">
   <div class="hero-inner">
     <div class="hero-avatar">
-      <img src="{{ base_path }}/images/image_duyguvargun.png" alt="Duygu Vargun" />
+      <img src="{{ base_path }}/images/image_duyguvargun.png" alt="Duygu Vargun" width="130" height="165" style="width:130px;height:165px;object-fit:cover;border-radius:50%;display:block;flex:0 0 auto;" />
     </div>
     <div class="hero-text">
       <h1 class="hero-name">Duygu Vargun, Ph.D.</h1>
