@@ -1,0 +1,60 @@
+---
+layout: default
+---
+
+{% include base_path %}
+
+<div id="main" class="home" role="main">
+  {{ content }}
+</div>
+
+<script>
+  (function () {
+    // Smooth-scroll internal nav links to their section, accounting for the
+    // fixed masthead height, and keep the active tab highlighted (scrollspy).
+    var header = document.querySelector('.masthead');
+
+    function headerOffset() {
+      return (header ? header.offsetHeight : 70) + 12;
+    }
+
+    var links = Array.prototype.slice.call(
+      document.querySelectorAll('a.js-scroll-link[href*="#"]')
+    ).filter(function (a) {
+      var hash = a.getAttribute('href').split('#')[1];
+      return hash && document.getElementById(hash);
+    });
+
+    links.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var id = link.getAttribute('href').split('#')[1];
+        var target = document.getElementById(id);
+        if (!target) { return; }
+        e.preventDefault();
+        var top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+        window.scrollTo({ top: top, behavior: 'smooth' });
+        history.replaceState(null, '', '#' + id);
+      });
+    });
+
+    // Scrollspy: mark the nav link for the section currently in view.
+    var sections = links.map(function (link) {
+      return document.getElementById(link.getAttribute('href').split('#')[1]);
+    });
+
+    function onScroll() {
+      var pos = window.pageYOffset + headerOffset() + 4;
+      var currentIndex = 0;
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].offsetTop <= pos) { currentIndex = i; }
+      }
+      links.forEach(function (l, i) {
+        l.classList.toggle('is-active', i === currentIndex);
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', onScroll);
+    onScroll();
+  })();
+</script>

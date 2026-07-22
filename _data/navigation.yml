@@ -1,33 +1,21 @@
 # The following is the order of the links in the header of the website.
 #
-# Changing the order here will adjust the order and you can also add additional
-# links. Removing a link prevents it from showing in the header, but does not
-# prevent it from being included in the site.
-#
-# NOTE that only one of the CV options should be selected, the first is for the
-#      Markdown formatted page while the second is generated using JSON.
+# On the one-page home layout, the internal links (starting with /#) smooth-scroll
+# to the matching <section id="..."> on the home page. "Publications" links out to
+# Google Scholar. Update the Scholar URL here if it ever changes.
 
 main:
+  - title: "About"
+    url: /#about
+
+  - title: "Research"
+    url: /#research
+
   - title: "Publications"
-    url: /publications/
+    url: "https://scholar.google.com/citations?user=cpB4pUUAAAAJ&hl=en"
 
-  # - title: "Talks"
-  #   url: /talks/    
+  - title: "Talks"
+    url: /#talks
 
-  # - title: "Teaching"
-  #   url: /teaching/    
-    
-  # - title: "Portfolio"
-  #   url: /portfolio/
-        
-  # - title: "Blog Posts"
-  #   url: /year-archive/
-    
-  # - title: "CV"
-  #   url: /cv/
-    
-  # - title: "CV"
-  #   url: /cv-json/
-    
-  # - title: "Guide"
-  #   url: /markdown/
+  - title: "Contact"
+    url: /#contact
